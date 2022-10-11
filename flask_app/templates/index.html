@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>Inicio sesión / registro</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid w-75">
+            <a class="navbar-brand" href="/">Inicio sesión / registro</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> 
+        </div>
+    </nav>
+    <div class="container-sm w-75">
+        <div class="row mt-5 justify-content-between">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}}" role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="col-5">
+                <h1 class="my-5">Register</h1>
+
+                <form class="border rounded px-3 py-5 w-80" action="/register" method="POST">
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">Nombre</label>
+                        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_nameHelp" required>
+                        <div id="first_nameHelp" class="form-text">Pon tu nombre.</div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Apellido</label>
+                        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" required>
+                        <div id="last_nameHelp" class="form-text">Pon tu apellido.</div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text">Pon tu email.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="birthday" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" name="birthday" class="form-control" id="birthday" aria-describedby="birthdayHelp" required>
+                        <div id="birthdayHelp" class="form-text">indica tu fecha de nacimiento.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="form-label">Genero</p>
+                        <div class="btn-group" role="group" aria-label="Genero" aria-describedby="genreHelp">
+                            <input type="radio" class="btn-check" name="genre" id="btnradio1" value="Masculino" autocomplete="off" checked>
+                            <label class="btn btn-outline-dark" for="btnradio1">Masculino</label>
+                        
+                            <input type="radio" class="btn-check" name="genre" id="btnradio2" value="Femenino" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="btnradio2">Femenino</label>
+                    
+                            <input type="radio" class="btn-check" name="genre" id="btnradio3" value="No especifico" autocomplete="off">
+                            <label class="btn btn-outline-dark" for="btnradio3">No especificar</label>
+                        </div>
+                        <div id="genreHelp" class="form-text">Selecciona tu genero.</div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" required>
+                        <div id="passwordHelp" class="form-text">
+                            <ul>
+                                <li>Debe tener entre 8 y 16 caracteres de largo</li>
+                                <li>Debe poseer al menos una minúscula y una mayúscula</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password_confirm" class="form-label">Password</label>
+                        <input type="password" name="password_confirm" class="form-control" id="password_confirm" aria-describedby="password_confirmHelp" required>
+                        <div id="password_confirmHelp" class="form-text">Confirma tu contraseña.</div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="acepta" id="accept_terms" name="accept_terms" aria-describedby="accept_termsHelp">
+                        <label class="form-check-label" for="accept_terms">
+                            Acepta nuestros terminos
+                        </label>
+                        <div id="accept_termsHelp" class="form-text">Debes aceptar nuestros terminso para poder registrarte</div>
+                    </div>
+            
+                    <button type="submit" class="btn btn-success mt-5">Enviar</button>
+                </form>
+                
+            </div>
+            <div class="col-4">
+                <h1 class="my-5">Login</h1>
+                <form class="border rounded px-3 py-5 w-80" action="/login" method="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text">Pon tu email.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" required>
+                        <div id="emailHelp" class="form-text">Escribe tu contraseña.</div>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-5">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
